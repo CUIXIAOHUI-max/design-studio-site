@@ -410,27 +410,16 @@ function CaseGallery() {
         );
       }
 
-      // Cards: individual shape morphs
+      // Cards: 統一圓角 → 完整矩形
       cardRefs.current.forEach((cardEl, i) => {
         if (!cardEl) return;
         const shapeEl = cardEl.querySelector(".case-morph__card-shape");
         if (!shapeEl) return;
 
-        const morphs = [
-          // Card 0: rounded inset → full
-          { from: "inset(6% 6% 6% 6% round 40px)", to: "inset(0% 0% 0% 0% round 0px)" },
-          // Card 1: border-radius shrink
-          { from: "inset(0% 0% 0% 0% round 32px)", to: "inset(0% 0% 0% 0% round 0px)" },
-          // Card 2: diagonal polygon → full
-          { from: "polygon(6% 0%, 100% 0%, 94% 100%, 0% 100%)", to: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)" },
-          // Card 3: circle → full
-          { from: "inset(0% 0% 0% 0% round 50%)", to: "inset(0% 0% 0% 0% round 0%)" },
-        ];
-
         gsap.fromTo(shapeEl,
-          { clipPath: morphs[i].from },
+          { clipPath: "inset(6% 6% 6% 6% round 32px)" },
           {
-            clipPath: morphs[i].to,
+            clipPath: "inset(0% 0% 0% 0% round 0px)",
             ease: "power2.inOut",
             scrollTrigger: {
               trigger: cardEl,
