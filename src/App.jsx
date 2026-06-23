@@ -639,7 +639,7 @@ function Contact() {
         <div className="contact__info reveal">
           <div className="contact__item">
             <div className="contact__item-icon">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M15.5 14.5l-3-1-4.5 4.5V4l4.5-2 4.5 2v12.5l-3-1-3 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              <img src="/images/icons/icon-address.png" alt="地址" width="24" height="24" />
             </div>
             <div className="contact__item-label">地址</div>
             <div className="contact__item-value">
@@ -648,14 +648,14 @@ function Contact() {
           </div>
           <div className="contact__item">
             <div className="contact__item-icon">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 4h12a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" stroke="currentColor" strokeWidth="1.5"/><path d="M2 6l8 5 8-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              <img src="/images/icons/icon-email.png" alt="電郵" width="24" height="24" />
             </div>
             <div className="contact__item-label">電郵</div>
             <div className="contact__item-value">Kwongyikrenovationengineering<br />@gmail.com</div>
           </div>
           <div className="contact__item">
             <div className="contact__item-icon">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M18 14.5v2a1 1 0 01-1 1 15 15 0 01-15-15 1 1 0 011-1h2a1 1 0 011 1 10 10 0 006 6 1 1 0 011 1z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              <img src="/images/icons/icon-phone.png" alt="電話" width="24" height="24" />
             </div>
             <div className="contact__item-label">電話 / WhatsApp</div>
             <div className="contact__item-value">
@@ -665,7 +665,7 @@ function Contact() {
           </div>
           <div className="contact__item">
             <div className="contact__item-icon">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M17 5.5A7.5 7.5 0 002 10.5M17 5.5A7.5 7.5 0 012 10.5M17 5.5l-4 2M2 10.5l4 2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/><circle cx="7" cy="13" r="2" stroke="currentColor" strokeWidth="1.5"/><circle cx="10" cy="10" r="2" stroke="currentColor" strokeWidth="1.5"/></svg>
+              <img src="/images/icons/icon-wechat.png" alt="微信" width="24" height="24" />
             </div>
             <div className="contact__item-label">微信</div>
             <div className="contact__item-value">haoming10</div>
