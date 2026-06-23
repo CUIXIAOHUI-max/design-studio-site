@@ -101,22 +101,6 @@ const projectCases = [
       "/images/projects/xiang-dong/3cf453150hb48e8f5b6388f3e1d45f33.jpg",
     ],
   },
-  {
-    id: "long-xi",
-    name: "瓏璽",
-    location: "—",
-    style: "高端訂製",
-    area: "—",
-    cover: "/images/projects/long-xi/图片1.png",
-    images: [
-      "/images/projects/long-xi/图片1.png",
-      "/images/projects/long-xi/图片2.png",
-      "/images/projects/long-xi/图片3.png",
-      "/images/projects/long-xi/图片4.png",
-      "/images/projects/long-xi/图片5.png",
-      "/images/projects/long-xi/图片6.png",
-    ],
-  },
 ];
 
 /* 工廠及展廳 */
@@ -190,8 +174,9 @@ function Hero() {
       gsap.from(".hero__subline", { opacity: 0, y: 20, duration: 1, delay: 0.9, ease: "power3.out" });
       gsap.from(".hero__cta", { opacity: 0, y: 20, duration: 0.8, delay: 1.2, ease: "power3.out" });
       gsap.from(".hero__trust", { opacity: 0, duration: 1, delay: 1.5 });
+      // Ken Burns — 緩慢放大
       gsap.to(".hero__bg img", {
-        y: -30,
+        scale: 1.15,
         ease: "none",
         scrollTrigger: {
           trigger: ref.current,
@@ -210,7 +195,7 @@ function Hero() {
       </div>
       <div className="hero__overlay" />
       <div className="hero__content">
-        <span className="hero__tag">KWONG YIK · 香港 · 1995</span>
+        <span className="hero__tag">KWONG YIK · 香港</span>
         <h1 className="hero__headline">
           以<em>匠心</em>，築生活
         </h1>
