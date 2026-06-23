@@ -386,7 +386,6 @@ body {
 .case-morph__featured-shape {
   width: 100%;
   height: 100%;
-  clip-path: inset(0% 0% 0% 0%);
   will-change: clip-path;
 }
 .case-morph__featured-shape img {
@@ -883,15 +882,33 @@ body {
 }
 
 @media (max-width: 640px) {
-  .container { padding: 0 24px; }
+  .container { padding: 0 28px; }
   .hero__content {
-    padding: 0 24px;
+    padding: 0 28px;
+  }
+  .hero__tag {
+    font-size: 10px;
+    letter-spacing: 3px;
+    margin-bottom: 24px;
+  }
+  .hero__headline {
+    font-size: clamp(38px, 11vw, 64px);
+    letter-spacing: -1px;
+    line-height: 1.08;
+  }
+  .hero__subline {
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 32px;
   }
   .hero__trust {
     flex-wrap: wrap;
     gap: 12px 24px;
     margin-top: 40px;
     padding-top: 24px;
+  }
+  .hero__trust-item {
+    font-size: 11px;
   }
   .services__grid {
     grid-template-columns: 1fr;

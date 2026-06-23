@@ -396,7 +396,7 @@ function CaseGallery() {
       // Featured: clip-path morph on scroll
       if (shapeRef.current) {
         gsap.fromTo(shapeRef.current,
-          { clipPath: "inset(8% 12% 8% 12% round 32px)" },
+          { clipPath: "inset(3% 4% 3% 4% round 16px)" },
           {
             clipPath: "inset(0% 0% 0% 0% round 0px)",
             ease: "power2.inOut",
