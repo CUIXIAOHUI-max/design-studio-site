@@ -170,10 +170,10 @@ body {
 }
 .hero__headline {
   font-family: var(--font-display);
-  font-size: clamp(48px, 8vw, 88px);
+  font-size: clamp(56px, 10vw, 120px);
   font-weight: 500;
-  line-height: 1.05;
-  letter-spacing: -1px;
+  line-height: 0.95;
+  letter-spacing: -2px;
   color: var(--text-primary);
   margin-bottom: 24px;
 }
@@ -360,7 +360,7 @@ body {
   line-height: 1.7;
 }
 
-/* ===== CASE GALLERY ===== */
+/* ===== CASE GALLERY (MORPHING) ===== */
 .case-gallery {
   padding: var(--section-padding);
   background: var(--bg-secondary);
@@ -374,122 +374,142 @@ body {
   max-width: 500px;
 }
 
-/* Featured */
-.case-gallery__featured {
+/* --- Featured Morph --- */
+.case-morph__featured {
   position: relative;
   width: 100%;
-  height: 75vh;
-  min-height: 500px;
-  margin-bottom: 4px;
-  overflow: hidden;
+  height: 85vh;
+  min-height: 560px;
+  margin-bottom: 80px;
   cursor: pointer;
+  overflow: hidden;
 }
-.case-gallery__featured-img {
+.case-morph__featured-shape {
   width: 100%;
   height: 100%;
+  clip-path: inset(0% 0% 0% 0%);
+  will-change: clip-path;
 }
-.case-gallery__featured-img img {
+.case-morph__featured-shape img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.8s var(--ease-out-expo);
 }
-.case-gallery__featured:hover .case-gallery__featured-img img {
+.case-morph__featured:hover .case-morph__featured-shape img {
   transform: scale(1.04);
 }
-.case-gallery__featured-overlay {
+.case-morph__featured:hover .case-morph__featured-content {
+  transform: translateY(0);
+  opacity: 1;
+}
+.case-morph__featured-content {
   position: absolute;
-  bottom: 0;
   left: 0;
   right: 0;
-  padding: 60px 48px 40px;
-  background: linear-gradient(transparent, rgba(10,10,10,0.65));
+  bottom: 0;
+  padding: 120px 80px 64px;
+  background: linear-gradient(transparent 0%, rgba(10,10,10,0.3) 40%, rgba(10,10,10,0.85) 100%);
+  transform: translateY(20px);
+  opacity: 0.85;
+  transition: all 0.6s var(--ease-out-expo);
 }
-.case-gallery__featured-style {
+.case-morph__featured-tag {
   display: inline-block;
   font-size: 11px;
-  letter-spacing: 3px;
+  letter-spacing: 4px;
   color: var(--accent);
   text-transform: uppercase;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
-.case-gallery__featured-name {
+.case-morph__featured-name {
   font-family: var(--font-display);
-  font-size: clamp(28px, 3.5vw, 40px);
+  font-size: clamp(36px, 5vw, 64px);
   font-weight: 500;
   color: var(--text-primary);
-  margin-bottom: 8px;
+  letter-spacing: -1px;
+  margin-bottom: 12px;
+  line-height: 1.1;
 }
-.case-gallery__featured-meta {
-  font-size: 14px;
-  color: var(--text-muted);
+.case-morph__featured-meta {
+  font-size: 15px;
+  color: var(--text-secondary);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
-.case-gallery__featured-dot {
-  color: var(--accent);
-}
+.case-morph__featured-dot { color: var(--accent); }
 
-/* Grid */
-.case-gallery__grid {
+/* --- Morph Cards Grid --- */
+.case-morph__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 4px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 60px 48px;
+  max-width: 1100px;
+  margin: 0 auto;
 }
-.case-gallery__card {
+.case-morph__card {
   position: relative;
-  aspect-ratio: 3 / 4;
-  overflow: hidden;
   cursor: pointer;
-  background: var(--bg-elevated);
+  display: flex;
+  flex-direction: column;
 }
-.case-gallery__card-img {
+.case-morph__card-shape {
   width: 100%;
-  height: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  will-change: clip-path, border-radius;
 }
-.case-gallery__card-img img {
+.case-morph__card-shape img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.7s var(--ease-out-expo);
 }
-.case-gallery__card:hover .case-gallery__card-img img {
+.case-morph__card:hover .case-morph__card-shape img {
   transform: scale(1.06);
 }
-.case-gallery__card-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 40px 28px 28px;
-  background: linear-gradient(transparent, rgba(10,10,10,0.65));
-  transform: translateY(10px);
-  opacity: 0;
-  transition: all 0.4s var(--ease-out);
+.case-morph__card-body {
+  padding: 24px 4px 0;
+  display: flex;
+  flex-direction: column;
 }
-.case-gallery__card:hover .case-gallery__card-overlay {
-  transform: translateY(0);
-  opacity: 1;
-}
-.case-gallery__card-style {
-  display: inline-block;
+.case-morph__card-tag {
   font-size: 10px;
   letter-spacing: 3px;
   color: var(--accent);
   text-transform: uppercase;
   margin-bottom: 8px;
 }
-.case-gallery__card-name {
+.case-morph__card-name {
   font-family: var(--font-display);
-  font-size: 18px;
+  font-size: clamp(20px, 2vw, 26px);
   font-weight: 500;
   color: var(--text-primary);
-  margin-bottom: 4px;
+  letter-spacing: -0.3px;
+  margin-bottom: 6px;
 }
-.case-gallery__card-meta {
-  font-size: 12px;
+.case-morph__card-meta {
+  font-size: 13px;
   color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.case-morph__card-meta-dot { color: var(--accent); }
+
+/* Individual morph shapes */
+.case-morph__card--0 .case-morph__card-shape {
+  clip-path: inset(6% 6% 6% 6% round 40px);
+}
+.case-morph__card--1 .case-morph__card-shape {
+  clip-path: inset(0% 0% 0% 0% round 32px);
+}
+.case-morph__card--2 .case-morph__card-shape {
+  clip-path: polygon(6% 0%, 100% 0%, 94% 100%, 0% 100%);
+}
+.case-morph__card--3 .case-morph__card-shape {
+  clip-path: inset(0% 0% 0% 0% round 50%);
 }
 
 /* ===== SHOWCASE ===== */
@@ -831,8 +851,12 @@ body {
   .services__grid {
     grid-template-columns: 1fr 1fr;
   }
-  .case-gallery__grid {
+  .case-morph__grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 40px 32px;
+  }
+  .case-morph__featured-content {
+    padding: 80px 40px 48px;
   }
   .showcase__grid {
     grid-template-columns: 1fr;
@@ -878,13 +902,19 @@ body {
   .services__grid {
     grid-template-columns: 1fr;
   }
-  .case-gallery__featured {
-    height: 45vh;
-    min-height: 280px;
+  .case-morph__featured {
+    height: 50vh;
+    min-height: 320px;
   }
-  .case-gallery__grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2px;
+  .case-morph__featured-content {
+    padding: 60px 24px 32px;
+  }
+  .case-morph__grid {
+    grid-template-columns: 1fr;
+    gap: 48px 0;
+  }
+  .case-morph__card-shape {
+    aspect-ratio: 4 / 3;
   }
   .showcase__item-body {
     padding: 28px 24px;

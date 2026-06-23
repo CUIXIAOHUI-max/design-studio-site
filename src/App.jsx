@@ -376,10 +376,13 @@ function Services() {
 
 function CaseGallery() {
   const [selected, setSelected] = useState(null);
-  const ref = useRef(null);
+  const featuredRef = useRef(null);
+  const shapeRef = useRef(null);
+  const cardRefs = useRef([]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Section header reveals
       gsap.utils.toArray(".case-gallery .reveal").forEach((el) => {
         gsap.to(el, {
           opacity: 1,
@@ -389,7 +392,56 @@ function CaseGallery() {
           scrollTrigger: { trigger: el, start: "top 85%" },
         });
       });
-    }, ref);
+
+      // Featured: clip-path morph on scroll
+      if (shapeRef.current) {
+        gsap.fromTo(shapeRef.current,
+          { clipPath: "inset(8% 12% 8% 12% round 32px)" },
+          {
+            clipPath: "inset(0% 0% 0% 0% round 0px)",
+            ease: "power2.inOut",
+            scrollTrigger: {
+              trigger: featuredRef.current,
+              start: "top 70%",
+              end: "bottom 30%",
+              scrub: 1.2,
+            },
+          }
+        );
+      }
+
+      // Cards: individual shape morphs
+      cardRefs.current.forEach((cardEl, i) => {
+        if (!cardEl) return;
+        const shapeEl = cardEl.querySelector(".case-morph__card-shape");
+        if (!shapeEl) return;
+
+        const morphs = [
+          // Card 0: rounded inset → full
+          { from: "inset(6% 6% 6% 6% round 40px)", to: "inset(0% 0% 0% 0% round 0px)" },
+          // Card 1: border-radius shrink
+          { from: "inset(0% 0% 0% 0% round 32px)", to: "inset(0% 0% 0% 0% round 0px)" },
+          // Card 2: diagonal polygon → full
+          { from: "polygon(6% 0%, 100% 0%, 94% 100%, 0% 100%)", to: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)" },
+          // Card 3: circle → full
+          { from: "inset(0% 0% 0% 0% round 50%)", to: "inset(0% 0% 0% 0% round 0%)" },
+        ];
+
+        gsap.fromTo(shapeEl,
+          { clipPath: morphs[i].from },
+          {
+            clipPath: morphs[i].to,
+            ease: "power2.inOut",
+            scrollTrigger: {
+              trigger: cardEl,
+              start: "top 82%",
+              end: "top 40%",
+              scrub: 0.8,
+            },
+          }
+        );
+      });
+    }, featuredRef);
     return () => ctx.revert();
   }, []);
 
@@ -397,8 +449,10 @@ function CaseGallery() {
     setSelected(null);
   }
 
+  const otherCases = projectCases.filter(p => !p.featured);
+
   return (
-    <section id="portfolio" className="case-gallery" ref={ref}>
+    <section id="portfolio" className="case-gallery" ref={featuredRef}>
       <div className="container">
         <div className="case-gallery__header reveal">
           <span className="section-label">PORTFOLIO</span>
@@ -408,40 +462,46 @@ function CaseGallery() {
           </p>
         </div>
 
-        {/* Featured project - full width */}
+        {/* Featured project with morphing shape */}
         {projectCases.filter(p => p.featured).map(project => (
-          <div className="case-gallery__featured reveal" key={project.id}
+          <div className="case-morph__featured reveal" key={project.id}
             onClick={() => setSelected(project)}>
-            <div className="case-gallery__featured-img">
+            <div className="case-morph__featured-shape" ref={shapeRef}>
               <img src={project.cover} alt={project.name} loading="lazy"
                 onError={(e) => { e.target.src = '/images/hero/建築室内圖片.jpg'; }} />
             </div>
-            <div className="case-gallery__featured-overlay">
-              <span className="case-gallery__featured-style">{project.style}</span>
-              <h3 className="case-gallery__featured-name">{project.name}</h3>
-              <div className="case-gallery__featured-meta">
+            <div className="case-morph__featured-content">
+              <span className="case-morph__featured-tag">{project.style}</span>
+              <h3 className="case-morph__featured-name">{project.name}</h3>
+              <div className="case-morph__featured-meta">
                 <span>{project.location}</span>
-                <span className="case-gallery__featured-dot">·</span>
+                <span className="case-morph__featured-dot">·</span>
                 <span>{project.images.length} 張實景圖</span>
               </div>
             </div>
           </div>
         ))}
 
-        {/* Grid of other projects */}
-        <div className="case-gallery__grid">
-          {projectCases.filter(p => !p.featured).map((project) => (
-            <div className="case-gallery__card reveal" key={project.id}
-              onClick={() => setSelected(project)}>
-              <div className="case-gallery__card-img">
+        {/* Morphing card grid */}
+        <div className="case-morph__grid">
+          {otherCases.map((project, i) => (
+            <div
+              className={`case-morph__card case-morph__card--${i} reveal`}
+              key={project.id}
+              ref={el => cardRefs.current[i] = el}
+              onClick={() => setSelected(project)}
+            >
+              <div className="case-morph__card-shape">
                 <img src={project.cover} alt={project.name} loading="lazy"
                   onError={(e) => { e.target.src = '/images/hero/建築室内圖片.jpg'; }} />
               </div>
-              <div className="case-gallery__card-overlay">
-                <span className="case-gallery__card-style">{project.style}</span>
-                <h3 className="case-gallery__card-name">{project.name}</h3>
-                <div className="case-gallery__card-meta">
-                  {project.location} · {project.area}
+              <div className="case-morph__card-body">
+                <span className="case-morph__card-tag">{project.style}</span>
+                <h3 className="case-morph__card-name">{project.name}</h3>
+                <div className="case-morph__card-meta">
+                  {project.location}
+                  <span className="case-morph__card-meta-dot">·</span>
+                  {project.images.length} 張實景圖
                 </div>
               </div>
             </div>
@@ -449,7 +509,7 @@ function CaseGallery() {
         </div>
       </div>
 
-      {/* Lightbox with image grid */}
+      {/* Lightbox */}
       {selected && (
         <div className="lightbox" onClick={closeLightbox}>
           <button className="lightbox__close" onClick={closeLightbox}>
