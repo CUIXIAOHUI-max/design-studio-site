@@ -1,0 +1,117 @@
+/* ===== DESIGN SYSTEM ===== */
+:root {
+  /* Colors — 高端簡約 */
+  --bg-primary: #0A0A0A;
+  --bg-secondary: #0F0F0F;
+  --bg-card: #161616;
+  --bg-elevated: #1C1C1C;
+  --text-primary: #FFFFFF;
+  --text-secondary: #A0A0A0;
+  --text-muted: #5C5C5C;
+  --accent: #C8A96E;
+  --accent-hover: #D4BA7E;
+  --accent-dim: rgba(200, 169, 110, 0.12);
+  --border: #262626;
+  --border-light: #1A1A1A;
+
+  /* Typography */
+  --font-display: 'Playfair Display', 'Noto Serif TC', serif;
+  --font-body: 'Inter', 'Noto Sans TC', -apple-system, sans-serif;
+
+  /* Spacing */
+  --section-padding: clamp(80px, 12vh, 160px) clamp(24px, 8vw, 120px);
+  --container-max: 1280px;
+
+  /* Transitions */
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+/* ===== RESET ===== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* ===== UTILITY CLASSES ===== */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.section-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+}
+
+.section-heading {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+}
+
+.section-subheading {
+  font-size: clamp(16px, 2vw, 18px);
+  color: var(--text-secondary);
+  max-width: 600px;
+  line-height: 1.8;
+}
+
+/* ===== REVEAL ANIMATION INITIAL STATE ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ===== SELECTION ===== */
+::selection {
+  background: var(--accent);
+  color: var(--bg-primary);
+}
